@@ -1,15 +1,11 @@
+import apolloClient from "../lib/apollo-client"
+import { ApolloProvider } from "@apollo/client"
+
 import "../styles/globals.css"
-
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client"
-
-const client = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_HASURA_URL,
-  cache: new InMemoryCache()
-})
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <Component {...pageProps} />
     </ApolloProvider>
   )

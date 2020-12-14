@@ -60,6 +60,18 @@ const HomePage = () => {
         ></textarea>
         <input type="submit" value="submit" />
       </form>
+
+      <hr />
+
+      <div>
+        <ul>
+          {data.letters.map((letter, idx) => (
+            <li key={idx}>
+              <a href={`/letters/${letter.id}`}>{letter.id}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }
