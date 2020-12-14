@@ -1,7 +1,18 @@
-import '../styles/globals.css'
+import "../styles/globals.css"
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client"
+
+const client = new ApolloClient({
+  uri: process.env.NEXT_PUBLIC_HASURA_URL,
+  cache: new InMemoryCache()
+})
+
+const MyApp = ({ Component, pageProps }) => {
+  return (
+    <ApolloProvider client={client}>
+      <Component {...pageProps} />
+    </ApolloProvider>
+  )
 }
 
 export default MyApp

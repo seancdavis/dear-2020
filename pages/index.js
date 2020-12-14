@@ -1,65 +1,67 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useState } from "react"
+import Head from "next/head"
+import gql from "graphql-tag"
+import { useQuery, useMutation } from "@apollo/client"
 
-export default function Home() {
+const GET_LETTERS_QUERY = gql`
+  query {
+    letters {
+      id
+      body
+    }
+  }
+`
+
+const CREATE_LETTER_MUTATION = gql`
+  mutation CreateLetter($body: String!) {
+    insert_letters_one(object: { body: $body }) {
+      id
+    }
+  }
+`
+
+const HomePage = () => {
+  const [body, setBody] = useState(null)
+  const [createLetter, { data: newLetterData }] = useMutation(CREATE_LETTER_MUTATION)
+
+  const { loading, error, data } = useQuery(GET_LETTERS_QUERY)
+
+  if (loading) return "Loading..."
+  if (error) return `Error! ${error.message}`
+  console.log(data)
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    console.log(body)
+    if (!body) {
+      return alert("GIMME A BODY")
+    }
+    createLetter({ variables: { body } })
+    // Form was sent!
+  }
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <h1>Dear 2020,</h1>
+      <p>[Write your letter ...]</p>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <form onSubmit={handleFormSubmit}>
+        <textarea
+          name="body"
+          cols="30"
+          rows="10"
+          placeholder="Write 2020 a letter ..."
+          onChange={(event) => setBody(event.target.value)}
+        ></textarea>
+        <input type="submit" value="submit" />
+      </form>
     </div>
   )
 }
+
+export default HomePage
