@@ -28,12 +28,7 @@ const HomePage = () => {
   }
 
   return (
-    <Layout>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <Layout title="Write a Letter">
       <h1>Dear 2020,</h1>
       <p>[Write your letter ...]</p>
 

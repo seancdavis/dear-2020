@@ -2,7 +2,7 @@ import Layout from "../components/layout"
 
 const TermsPage = () => {
   return (
-    <Layout>
+    <Layout title="Legal Stuff">
       <h1>Terms</h1>
       <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor temporibus blanditiis
