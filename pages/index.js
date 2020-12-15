@@ -1,16 +1,8 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Head from "next/head"
 import gql from "graphql-tag"
-import { useQuery, useMutation } from "@apollo/client"
-
-const GET_LETTERS_QUERY = gql`
-  query {
-    letters {
-      id
-      body
-    }
-  }
-`
+import { useMutation } from "@apollo/client"
+import ContentEditable from "react-contenteditable"
 
 const CREATE_LETTER_MUTATION = gql`
   mutation CreateLetter($body: String!) {
@@ -21,23 +13,16 @@ const CREATE_LETTER_MUTATION = gql`
 `
 
 const HomePage = () => {
-  const [body, setBody] = useState(null)
+  const [body, setBody] = useState("")
+  const editableRef = useRef(null)
   const [createLetter, { data: newLetterData }] = useMutation(CREATE_LETTER_MUTATION)
 
-  const { loading, error, data } = useQuery(GET_LETTERS_QUERY)
-
-  if (loading) return "Loading..."
-  if (error) return `Error! ${error.message}`
-  console.log(data)
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault()
-    console.log(body)
-    if (!body) {
+  const handleLetterSubmit = () => {
+    if (!body || body.length === 0) {
       return alert("GIMME A BODY")
     }
     createLetter({ variables: { body } })
-    // Form was sent!
+    setBody("")
   }
 
   return (
@@ -50,28 +35,15 @@ const HomePage = () => {
       <h1>Dear 2020,</h1>
       <p>[Write your letter ...]</p>
 
-      <form onSubmit={handleFormSubmit}>
-        <textarea
-          name="body"
-          cols="30"
-          rows="10"
-          placeholder="Write 2020 a letter ..."
-          onChange={(event) => setBody(event.target.value)}
-        ></textarea>
-        <input type="submit" value="submit" />
-      </form>
+      <ContentEditable
+        innerRef={editableRef}
+        html={body}
+        disabled={false}
+        onChange={(event) => setBody(event.target.value)}
+        tagName="div"
+      />
 
-      <hr />
-
-      <div>
-        <ul>
-          {data.letters.map((letter, idx) => (
-            <li key={idx}>
-              <a href={`/letters/${letter.id}`}>{letter.id}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <button onClick={handleLetterSubmit}>Submit Letter</button>
     </div>
   )
 }
