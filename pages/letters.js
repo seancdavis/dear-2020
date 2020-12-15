@@ -2,6 +2,8 @@ import Head from "next/head"
 import gql from "graphql-tag"
 import { useQuery } from "@apollo/client"
 
+import Layout from "../components/layout"
+
 const GET_LETTERS_QUERY = gql`
   query {
     letters {
@@ -11,7 +13,7 @@ const GET_LETTERS_QUERY = gql`
   }
 `
 
-const HomePage = () => {
+const LettersPage = () => {
   const { loading, error, data } = useQuery(GET_LETTERS_QUERY)
 
   if (loading) return "Loading..."
@@ -27,7 +29,7 @@ const HomePage = () => {
   }
 
   return (
-    <div>
+    <Layout>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -44,8 +46,8 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }
 
-export default HomePage
+export default LettersPage

@@ -4,6 +4,8 @@ import gql from "graphql-tag"
 import { useMutation } from "@apollo/client"
 import ContentEditable from "react-contenteditable"
 
+import Layout from "../components/layout"
+
 const CREATE_LETTER_MUTATION = gql`
   mutation CreateLetter($body: String!) {
     insert_letters_one(object: { body: $body }) {
@@ -26,7 +28,7 @@ const HomePage = () => {
   }
 
   return (
-    <div>
+    <Layout>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -44,7 +46,7 @@ const HomePage = () => {
       />
 
       <button onClick={handleLetterSubmit}>Submit Letter</button>
-    </div>
+    </Layout>
   )
 }
 
