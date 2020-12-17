@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.3.6",
+    "@svgr/webpack": "^5.5.0",
     "apollo-boost": "^0.4.9",
     "apollo-link-http": "^1.5.17",
     "autoprefixer": "^10.1.0",

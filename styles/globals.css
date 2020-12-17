@@ -1,3 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-gray-800
+    font-body
+    text-gray-50;
+}
+
+svg {
+  @apply w-full;
+}
+
+svg path {
+  fill: currentColor;
+}
