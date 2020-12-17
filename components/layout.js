@@ -35,7 +35,9 @@ const Layout = ({ children, title }) => {
       </div>
 
       <div className="max-w-xs mx-auto mb-12">
-        <Logo />
+        <a href="/">
+          <Logo />
+        </a>
       </div>
 
       {children}
