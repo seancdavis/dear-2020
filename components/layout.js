@@ -40,7 +40,28 @@ const Layout = ({ children, title }) => {
         </a>
       </div>
 
-      {children}
+      <div className="mb-12">{children}</div>
+
+      <div className="py-8 px-4">
+        <div className="max-w-md mx-auto text-center text-sm">
+          <p className="mb-4">
+            Made with 🥪 by{" "}
+            <a href="https://www.seancdavis.com/" target="_blank" className="underline">
+              Sean C Davis
+            </a>
+            .
+          </p>
+          <div className="flex justify-center">
+            <p className="mx-2">&copy; 2020, Sean C Davis</p>
+            <p className="">-</p>
+            <p className="mx-2">
+              <a href="/terms" className="underline">
+                Legal Stuff
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
