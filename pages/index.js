@@ -18,7 +18,11 @@ const HomePage = () => {
   const [body, setBody] = useState("")
   const [status, setStatus] = useState(
     <p>
-      Write a letter to 2020 in the box below. Don't be afraid to tell 2020 how you really feel.
+      Write a letter to 2020 in the box below. Don't be afraid to tell 2020 how you really feel. (
+      <a href="/about" className="underline">
+        Why is this a thing
+      </a>
+      ?)
     </p>
   )
   const editableRef = useRef(null)
