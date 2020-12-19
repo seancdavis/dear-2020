@@ -1,6 +1,6 @@
 const icons = {
   arrowRight: (
-    <g stroke="none" stroke-width="1">
+    <g stroke="none" strokeWidth="1">
       <polygon points="138.933333 11 108.565333 41.1653333 174.442667 107.042667 0 107.042667 0 149.624 174.442667 149.624 108.565333 215.501333 138.933333 245.666667 256 128.333333"></polygon>
     </g>
   )
