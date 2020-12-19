@@ -2,15 +2,7 @@ import gql from "graphql-tag"
 
 import apolloClient from "../../lib/apollo-client"
 
-const LetterPage = ({ letter }) => {
-  return (
-    <>
-      <a href="/">Go Home</a>
-      <hr />
-      <div dangerouslySetInnerHTML={{ __html: letter.body }} />
-    </>
-  )
-}
+import Layout from "../../components/layout"
 
 const GET_LETTER_QUERY = gql`
   query GetLetter($id: uuid!) {
@@ -20,6 +12,16 @@ const GET_LETTER_QUERY = gql`
     }
   }
 `
+
+const LetterPage = ({ letter }) => {
+  return (
+    <Layout>
+      <div className="max-w-md mx-auto p-4 bg-gray-200 text-gray-800 rounded-sm">
+        <div dangerouslySetInnerHTML={{ __html: letter.body }} />
+      </div>
+    </Layout>
+  )
+}
 
 export async function getServerSideProps(context) {
   const id = context.params.id
