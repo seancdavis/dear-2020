@@ -34,15 +34,38 @@ const Letter = (letter) => {
   )
 }
 
+const LetterSkeleton = () => {
+  return (
+    <div className="h-32 bg-gray-600 rounded-sm shadow-md relative overflow-hidden letter-skeleton"></div>
+  )
+}
+
 const LettersPage = () => {
   const { loading, error, data } = useQuery(GET_LETTERS_QUERY)
 
   let body
 
   if (loading) {
-    body = <p>"Loading..."</p>
+    body = (
+      <div className="grid grid-cols-4 gap-6 auto-rows-fr">
+        {[...Array(12)].map((_, idx) => (
+          <LetterSkeleton key={idx} />
+        ))}
+      </div>
+    )
   } else if (error) {
-    body = <p>Error loading letters. Please refresh the page.</p>
+    body = (
+      <div className="text-center text-2xl bg-yellow-300 max-w-md mx-auto p-6 rounded-sm text-black">
+        <p>
+          Error loading letters.
+          <br /> Please{" "}
+          <a href="/letters" className="underline">
+            refresh the page
+          </a>
+          .
+        </p>
+      </div>
+    )
   } else {
     body = (
       <div className="grid grid-cols-4 gap-6 auto-rows-fr">

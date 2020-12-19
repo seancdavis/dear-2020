@@ -1,0 +1,33 @@
+@keyframes shine-avatar {
+  0% {
+    top: -210%;
+    left: -210%;
+  }
+
+  100% {
+    top: -100%;
+    left: -30%;
+  }
+}
+
+.letter-skeleton:after {
+  content: "";
+  height: 300%;
+  left: -210%;
+  opacity: 1;
+  position: absolute;
+  top: -210%;
+  transform: rotate(30deg);
+  width: 200%;
+
+  background: rgba(255, 255, 255, 0.13);
+  background: linear-gradient(
+    to right,
+    rgba(75, 85, 99, 1) 0%,
+    rgba(75, 85, 99, 0.5) 77%,
+    rgba(255, 255, 255, 0.5) 92%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  animation: shine-avatar 1s infinite linear;
+}
