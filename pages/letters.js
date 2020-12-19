@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 
 const GET_LETTERS_QUERY = gql`
   query {
-    letters {
+    letters(order_by: { created_at: desc }) {
       id
       body
     }
