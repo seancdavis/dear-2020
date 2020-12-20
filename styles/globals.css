@@ -18,3 +18,43 @@ svg path,
 svg polygon {
   fill: currentColor;
 }
+
+h1 {
+  @apply mb-4
+    text-4xl;
+}
+
+h2 {
+  @apply mb-4
+    text-3xl;
+}
+
+h3 {
+  @apply mb-2
+    text-xl;
+}
+
+p:not(:last-child) {
+  @apply mb-4;
+}
+
+a {
+  @apply underline;
+}
+
+ol {
+  @apply list-decimal
+    mb-4
+    ml-4;
+}
+
+li > ol {
+  @apply ml-8
+    mt-4;
+
+  list-style-type: lower-alpha;
+}
+
+li {
+  @apply mb-3;
+}

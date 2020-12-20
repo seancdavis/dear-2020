@@ -39,7 +39,7 @@ const Layout = ({ children, title }) => {
       <div className="py-8 px-4">
         <div className="max-w-md mx-auto text-center text-sm">
           <p className="mb-4">
-            Made with 🥪 by{" "}
+            Made with ❤️ and 🥪 by{" "}
             <a href="https://www.seancdavis.com/" target="_blank" className="underline">
               Sean C Davis
             </a>
