@@ -47,14 +47,23 @@ const HomePage = () => {
         <div className="max-w-md mx-auto mb-8 rounded-sm">{status}</div>
 
         <form onSubmit={handleLetterSubmit} className="max-w-md mx-auto">
-          <textarea
-            name="body"
-            placeholder="Dear 2020, ..."
-            className="bg-gray-50 text-gray-800 p-4 rounded-sm w-full h-56 mb-4"
-            required
-            onChange={(event) => setFormData({ ...formData, body: event.target.value })}
-            value={formData.body}
-          />
+          <div className="mb-4">
+            <textarea
+              name="body"
+              placeholder="Dear 2020, ..."
+              className="bg-gray-50 text-gray-800 p-4 rounded-sm w-full h-56"
+              required
+              onChange={(event) => setFormData({ ...formData, body: event.target.value })}
+              value={formData.body}
+            />
+            <p className="text-xs italic">
+              Supports markdown syntax.{" "}
+              <a href="https://www.markdownguide.org/basic-syntax/" target="_blank">
+                Learn more
+              </a>
+              .
+            </p>
+          </div>
           <div className="mb-4">
             <label htmlFor="#signature" className="block mb-1">
               Signature

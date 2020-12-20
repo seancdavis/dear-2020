@@ -1,4 +1,5 @@
 import gql from "graphql-tag"
+import MarkdownIt from "markdown-it"
 
 import apolloClient from "../../lib/apollo-client"
 
@@ -18,8 +19,8 @@ const LetterPage = ({ letter }) => {
   return (
     <Layout>
       <div className="max-w-md mx-auto p-4 bg-gray-200 text-gray-800 rounded-sm">
-        <div dangerouslySetInnerHTML={{ __html: letter.body }} className="mb-4" />
-        {letter.signature && <p>- {letter.signature}</p>}
+        <div dangerouslySetInnerHTML={{ __html: letter.bodyHtml }} className="mb-4" />
+        <p>- {letter.signature}</p>
       </div>
     </Layout>
   )
@@ -36,8 +37,15 @@ export async function getServerSideProps(context) {
     }
   }
 
+  const letter = {
+    ...data.data.letter,
+    bodyHtml: MarkdownIt().render(data.data.letter.body || "")
+  }
+
+  console.log(letter)
+
   return {
-    props: { letter: data.data.letter } // will be passed to the page component as props
+    props: { letter }
   }
 }
 
