@@ -15,7 +15,6 @@ const GET_LETTER_QUERY = gql`
 `
 
 const LetterPage = ({ letter }) => {
-  console.log(letter)
   return (
     <Layout>
       <div className="max-w-md mx-auto p-4 bg-gray-200 text-gray-800 rounded-sm">
