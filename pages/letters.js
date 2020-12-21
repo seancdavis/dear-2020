@@ -1,6 +1,8 @@
 import Head from "next/head"
 import gql from "graphql-tag"
 import { useQuery } from "@apollo/client"
+import MarkdownIt from "markdown-it"
+import stripHtml from "string-strip-html"
 
 import Icon from "../components/icon"
 import Layout from "../components/layout"
@@ -10,24 +12,26 @@ const GET_LETTERS_QUERY = gql`
     letters(order_by: { created_at: desc }) {
       id
       body
+      signature
     }
   }
 `
 
 const Letter = (letter) => {
   const letterSnippet = (letter) => {
-    let snippet = letter.body.slice(0, 100)
-    if (letter.body.length > 100) {
-      snippet += " ..."
-    }
-    return snippet
+    const firstParagraph = (letter.body || "").split("\n")[0]
+    const firstParagraphHtml = MarkdownIt().render(firstParagraph)
+    let snippet = stripHtml(firstParagraphHtml).result
+    let words = snippet.split(" ")
+    return words.length > 20 ? `${words.slice(0, 20).join(" ")} ...` : snippet
   }
 
   return (
     <article className="bg-gray-200 text-gray-800 p-4 rounded-sm shadow-md flex flex-col justify-between">
       <div className="mb-2" dangerouslySetInnerHTML={{ __html: letterSnippet(letter) }} />
+      <p className="mb-4">- {letter.signature}</p>
       <a href={`/letters/${letter.id}`}>
-        <span className="inline-block align-middle mr-2 underline">View Letter</span>
+        <span className="inline-block align-middle mr-2 underline">Read Letter</span>
         <Icon name="arrowRight" className="inline-block w-4" />
       </a>
     </article>
