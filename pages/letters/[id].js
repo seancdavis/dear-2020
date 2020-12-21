@@ -18,9 +18,11 @@ const GET_LETTER_QUERY = gql`
 const LetterPage = ({ letter }) => {
   return (
     <Layout>
-      <div className="max-w-md mx-auto p-4 bg-gray-200 text-gray-800 rounded-sm">
-        <div dangerouslySetInnerHTML={{ __html: letter.bodyHtml }} className="mb-4" />
-        <p>- {letter.signature}</p>
+      <div className="max-w-md mx-auto px-6 sm:px-0">
+        <div className="p-4 bg-gray-200 text-gray-800 rounded-sm">
+          <div dangerouslySetInnerHTML={{ __html: letter.bodyHtml }} className="mb-4" />
+          <p>- {letter.signature}</p>
+        </div>
       </div>
     </Layout>
   )

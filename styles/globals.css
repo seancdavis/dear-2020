@@ -34,7 +34,7 @@ h3 {
     text-xl;
 }
 
-p:not(:last-child) {
+p {
   @apply mb-4;
 }
 

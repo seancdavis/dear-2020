@@ -1,0 +1,15 @@
+.layout-logo {
+  max-width: 9rem;
+}
+
+@screen sm {
+  .layout-logo {
+    max-width: 10rem;
+  }
+}
+
+@screen md {
+  .layout-logo {
+    max-width: 12rem;
+  }
+}

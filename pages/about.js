@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 const AboutPage = () => {
   return (
     <Layout title="WTF is this?">
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-lg mx-auto px-6 sm:px-0">
         <h1 className="text-center">Why is this a thing?</h1>
         <div className="text-lg">
           <p>

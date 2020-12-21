@@ -51,7 +51,7 @@ const LettersPage = () => {
 
   if (loading) {
     body = (
-      <div className="grid grid-cols-4 gap-6 auto-rows-fr">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
         {[...Array(12)].map((_, idx) => (
           <LetterSkeleton key={idx} />
         ))}
@@ -72,7 +72,7 @@ const LettersPage = () => {
     )
   } else {
     body = (
-      <div className="grid grid-cols-4 gap-6 auto-rows-fr">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
         {data.letters.map((letter, idx) => (
           <Letter {...letter} key={idx} />
         ))}
@@ -88,7 +88,7 @@ const LettersPage = () => {
       </Head>
 
       <div>
-        <div className="container mx-auto">{body}</div>
+        <div className="container mx-auto px-6 xl:px-0">{body}</div>
       </div>
     </Layout>
   )
