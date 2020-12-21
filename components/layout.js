@@ -1,12 +1,42 @@
 import Head from "next/head"
+import { useRouter } from "next/router"
 
 import Logo from "../public/dear-2020-logo.svg"
 
-const Layout = ({ children, title }) => {
+const Layout = ({ children, description, image, title }) => {
+  const defaults = {
+    description: "Write a letter to 2020. Tell 2020 how you really feel.",
+    title: "Dear 2020",
+    image: "/dear-2020-meta-image.png"
+  }
+
+  const router = useRouter()
+
   return (
     <div>
       <Head>
-        <title>{title || "Dear 2020,"} | Dear 2020,</title>
+        <title>{title || defaults.title} | Dear 2020</title>
+
+        <meta name="description" content={description || defaults.description} />
+
+        <meta property="og:title" content={`${title || defaults.title} | Dear 2020`} />
+        <meta property="og:description" content={description || defaults.description} />
+        <meta
+          property="og:image"
+          content={`https://dear2020.seancdavis.com${image || defaults.image}`}
+        />
+        <meta property="og:url" content={`https://dear2020.seancdavis.com${router.pathname}`} />
+
+        <meta property="twitter:title" content={`${title || defaults.title} | Dear 2020`} />
+        <meta property="twitter:description" content={description || defaults.description} />
+        <meta
+          property="twitter:image"
+          content={`https://dear2020.seancdavis.com${image || defaults.image}`}
+        />
+        <meta property="twitter:card" content="summary_large_image" />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

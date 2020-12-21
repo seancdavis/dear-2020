@@ -2,7 +2,10 @@ import Layout from "../components/layout"
 
 const AboutPage = () => {
   return (
-    <Layout title="WTF is this?">
+    <Layout
+      title="WTF is this?"
+      description="Why did I make a website to send letters to 2020? TBH I don't really know, but here's an attempt at an explanation."
+    >
       <div className="max-w-lg mx-auto px-6 sm:px-0">
         <h1 className="text-center">Why is this a thing?</h1>
         <div className="text-lg">

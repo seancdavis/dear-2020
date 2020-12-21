@@ -81,7 +81,10 @@ const LettersPage = () => {
   }
 
   return (
-    <Layout title="Letters">
+    <Layout
+      title="Letters"
+      description="Read letters others sent to 2020. Join the community in telling 2020 how you really feel."
+    >
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
