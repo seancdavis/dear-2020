@@ -20,15 +20,19 @@ const Layout = ({ children, title }) => {
       <div className="mb-4 py-8 px-4">
         <ul className="flex mx-auto justify-center">
           <li className="mx-4">
-            <a href="/">Write a Letter</a>
+            <a href="/">
+              Write<span className="hidden sm:inline"> a Letter</span>
+            </a>
           </li>
           <li className="mx-4">
-            <a href="/letters">Read Letters</a>
+            <a href="/letters">
+              Read<span className="hidden sm:inline"> Letters</span>
+            </a>
           </li>
         </ul>
       </div>
 
-      <div className="mx-auto mb-12" style={{ maxWidth: "12rem" }}>
+      <div className="mx-auto mb-12 layout-logo">
         <a href="/">
           <Logo />
         </a>
@@ -45,15 +49,15 @@ const Layout = ({ children, title }) => {
             </a>
             .
           </p>
-          <div className="flex justify-center">
-            <p className="mx-2">&copy; 2020, Sean C Davis</p>
-            <p>-</p>
-            <p className="mx-2">
+          <div className="sm:flex justify-center mt-10 sm:mt-0">
+            <p className="mx-2 mb-3">&copy; 2020, Sean C Davis</p>
+            <p className="hidden sm:block">-</p>
+            <p className="mx-2 mb-3">
               <a href="/about" className="underline">
                 WTF is this?
               </a>
             </p>
-            <p>-</p>
+            <p className="hidden sm:block">-</p>
             <p className="mx-2">
               <a href="/terms" className="underline">
                 Legal Stuff

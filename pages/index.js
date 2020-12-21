@@ -43,7 +43,7 @@ const HomePage = () => {
 
   return (
     <Layout title="Write a Letter">
-      <div className="container mx-auto">
+      <div className="container mx-auto px-6 sm:px-0">
         <div className="max-w-md mx-auto mb-8 rounded-sm">{status}</div>
 
         <form onSubmit={handleLetterSubmit} className="max-w-md mx-auto">
@@ -81,7 +81,7 @@ const HomePage = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="#email" className="block mb-1">
-              Email
+              Email (optional)
             </label>
             <input
               type="email"

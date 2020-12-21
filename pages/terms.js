@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 const TermsPage = () => {
   return (
     <Layout title="Legal Stuff">
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-lg mx-auto px-6 sm:px-0">
         <h1 className="text-center">Legal Stuff &amp; Things</h1>
         <div className="text-lg">
           <h2 className="uppercase mt-8 mb-2 text-2xl text-center">Terms &amp; Conditions</h2>
