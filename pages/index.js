@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { useState } from "react"
 import gql from "graphql-tag"
 import { useMutation } from "@apollo/client"
@@ -13,38 +14,31 @@ const CREATE_LETTER_MUTATION = gql`
 `
 
 const HomePage = () => {
+  const router = useRouter()
   const initFormData = { body: "", signature: "", email: "" }
   const [formData, setFormData] = useState(initFormData)
-  const [status, setStatus] = useState(
-    <p>
-      Write a letter to 2020 in the box below. Don't be afraid to tell 2020 how you really feel. (
-      <a href="/about" className="underline">
-        Why is this a thing
-      </a>
-      ?)
-    </p>
-  )
   const [createLetter] = useMutation(CREATE_LETTER_MUTATION)
 
   const handleLetterSubmit = async (event) => {
     event.preventDefault()
     const { data: newLetterData } = await createLetter({ variables: formData })
     setFormData(initFormData)
-    setStatus(
-      <p>
-        Your letter has been sent.{" "}
-        <a className="underline" href={`/letters/${newLetterData.letter.id}`}>
-          View it
-        </a>
-        !
-      </p>
-    )
+    router.push(`/letters/${newLetterData.letter.id}`)
   }
 
   return (
     <Layout title="Write a Letter">
       <div className="container mx-auto px-6 sm:px-0">
-        <div className="max-w-md mx-auto mb-8 rounded-sm">{status}</div>
+        <div className="max-w-md mx-auto mb-8 rounded-sm">
+          <p>
+            Write a letter to 2020 in the box below. Don't be afraid to tell 2020 how you really
+            feel. (
+            <a href="/about" className="underline">
+              Why is this a thing
+            </a>
+            ?)
+          </p>
+        </div>
 
         <form onSubmit={handleLetterSubmit} className="max-w-md mx-auto">
           <div className="mb-4">
