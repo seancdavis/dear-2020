@@ -44,8 +44,6 @@ export async function getServerSideProps(context) {
     bodyHtml: MarkdownIt().render(data.data.letter.body || "")
   }
 
-  console.log(letter)
-
   return {
     props: { letter }
   }
