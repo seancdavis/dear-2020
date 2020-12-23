@@ -74,11 +74,6 @@ const LettersPage = () => {
       title="Letters"
       description="Read letters others sent to 2020. Join the community in telling 2020 how you really feel."
     >
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <div>
         <div className="container mx-auto px-6 xl:px-0">{body}</div>
       </div>
