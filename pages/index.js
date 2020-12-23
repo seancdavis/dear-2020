@@ -1,32 +1,26 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
-import gql from "graphql-tag"
-import { useMutation } from "@apollo/client"
 
 import { buildUrl } from "../config"
 
+import { post } from "../lib/fetch"
+
 import Layout from "../components/layout"
 import ShareButtons from "../components/share-buttons"
-
-const CREATE_LETTER_MUTATION = gql`
-  mutation CreateLetter($body: String!, $signature: String!, $email: String) {
-    letter: insert_letters_one(object: { body: $body, signature: $signature, email: $email }) {
-      id
-    }
-  }
-`
 
 const HomePage = () => {
   const router = useRouter()
   const initFormData = { body: "", signature: "", email: "" }
   const [formData, setFormData] = useState(initFormData)
-  const [createLetter] = useMutation(CREATE_LETTER_MUTATION)
 
   const handleLetterSubmit = async (event) => {
     event.preventDefault()
-    const { data: newLetterData } = await createLetter({ variables: formData })
+    const { letter } = await post("/api/letters", formData)
+    if (!letter) {
+      return alert("There was an problem submitting your letter.")
+    }
     setFormData(initFormData)
-    router.push(`/letters/${newLetterData.letter.id}`)
+    router.push(`/letters/${letter.id}`)
   }
 
   return (

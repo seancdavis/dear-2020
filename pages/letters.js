@@ -16,8 +16,10 @@ const Letter = (letter) => {
 
   return (
     <article className="bg-gray-200 text-gray-800 p-4 rounded-sm shadow-md flex flex-col justify-between">
-      <div className="mb-2" dangerouslySetInnerHTML={{ __html: letterSnippet(letter) }} />
-      <p className="mb-4">- {letter.signature}</p>
+      <div>
+        <div className="mb-2" dangerouslySetInnerHTML={{ __html: letterSnippet(letter) }} />
+        <p className="mb-4">- {letter.signature}</p>
+      </div>
       <a href={`/letters/${letter.id}`}>
         <span className="inline-block align-middle mr-2 underline">Read Letter</span>
         <Icon name="arrowRight" className="inline-block w-4" />
