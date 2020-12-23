@@ -1,5 +1,7 @@
-exports.domain = "dear2020.seancdavis.com"
+const isProd = process.env.NODE_ENV === "production"
 
-exports.baseUrl = `https://${this.domain}`
+exports.domain = isProd ? "dear2020.seancdavis.com" : "localhost:3000"
+
+exports.baseUrl = `http${isProd ? "s" : ""}://${this.domain}`
 
 exports.buildUrl = (path) => `${this.baseUrl}${path}`

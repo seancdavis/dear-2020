@@ -1,5 +1,4 @@
 import useSWR from "swr"
-import Head from "next/head"
 import MarkdownIt from "markdown-it"
 import stripHtml from "string-strip-html"
 
