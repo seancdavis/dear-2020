@@ -30,7 +30,7 @@ const LetterPage = ({ letter }) => {
           <p>- {letter.signature}</p>
         </div>
 
-        <p className="text-sm text-center mb-0">Tell the world how much you love this letter!</p>
+        <p className="text-sm text-center mb-2">Tell the world how much you love this letter!</p>
         <ShareButtons url={buildUrl(`/letters/${letter.id}`)} />
       </div>
     </Layout>

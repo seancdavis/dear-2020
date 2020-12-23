@@ -102,7 +102,7 @@ const HomePage = () => {
           </div>
         </form>
 
-        <p className="text-sm text-center mb-0">Loving this site? Share it!</p>
+        <p className="text-sm text-center mb-2">Loving this site? Share it!</p>
         <ShareButtons url={buildUrl("/")} />
       </div>
     </Layout>

@@ -10,14 +10,14 @@ import {
 const ShareButtons = ({ url }) => {
   return (
     <div className="flex justify-center">
-      <EmailShareButton url={url} className="w-10 rounded-sm overflow-hidden mx-1">
-        <EmailIcon />
+      <EmailShareButton url={url} className="rounded-sm overflow-hidden mx-1">
+        <EmailIcon className="h-10 w-10" />
       </EmailShareButton>
-      <FacebookShareButton url={url} className="w-10 rounded-sm overflow-hidden mx-1">
-        <FacebookIcon />
+      <FacebookShareButton url={url} className="rounded-sm overflow-hidden mx-1">
+        <FacebookIcon className="h-10 w-10" />
       </FacebookShareButton>
-      <TwitterShareButton url={url} className="w-10 rounded-sm overflow-hidden mx-1">
-        <TwitterIcon />
+      <TwitterShareButton url={url} className="rounded-sm overflow-hidden mx-1">
+        <TwitterIcon className="h-10 w-10" />
       </TwitterShareButton>
     </div>
   )
