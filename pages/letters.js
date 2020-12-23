@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import useSWR from "swr"
 import Head from "next/head"
 import MarkdownIt from "markdown-it"
 import stripHtml from "string-strip-html"
@@ -34,23 +34,11 @@ const LetterSkeleton = () => {
 }
 
 const LettersPage = () => {
-  const [letters, setLetters] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-
-  useEffect(async () => {
-    const res = await fetch("/api/letters")
-    const json = await res.json()
-    if (!json.letters) {
-      setError(true)
-    }
-    setLetters(json.letters)
-    setLoading(false)
-  }, [])
+  const { data, error } = useSWR("/api/letters")
 
   let body
 
-  if (loading) {
+  if (!data) {
     body = (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
         {[...Array(12)].map((_, idx) => (
@@ -74,7 +62,7 @@ const LettersPage = () => {
   } else {
     body = (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
-        {letters.map((letter, idx) => (
+        {data.letters.map((letter, idx) => (
           <Letter {...letter} key={idx} />
         ))}
       </div>
