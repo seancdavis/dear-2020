@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
+import { buildUrl } from "../config"
 
 import Logo from "../public/dear-2020-logo.svg"
 
@@ -21,21 +22,15 @@ const Layout = ({ children, description, image, title }) => {
 
         <meta property="og:title" content={`${title || defaults.title} | Dear 2020`} />
         <meta property="og:description" content={description || defaults.description} />
-        <meta
-          property="og:image"
-          content={`https://dear2020.seancdavis.com${image || defaults.image}`}
-        />
-        <meta property="og:url" content={`https://dear2020.seancdavis.com${router.pathname}`} />
+        <meta property="og:image" content={buildUrl(image || defaults.image)} />
+        <meta property="og:url" content={buildUrl(router.pathname)} />
 
         <meta property="twitter:title" content={`${title || defaults.title} | Dear 2020`} />
         <meta property="twitter:description" content={description || defaults.description} />
-        <meta
-          property="twitter:image"
-          content={`https://dear2020.seancdavis.com${image || defaults.image}`}
-        />
+        <meta property="twitter:image" content={buildUrl(image || defaults.image)} />
         <meta property="twitter:card" content="summary_large_image" />
 
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
