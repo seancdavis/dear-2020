@@ -27,7 +27,6 @@ export default async (req, res) => {
   })
 
   const { body, method } = req
-  console.log(body, ":::", method)
 
   let response = {}
 
