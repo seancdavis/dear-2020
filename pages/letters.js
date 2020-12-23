@@ -1,21 +1,9 @@
-import Head from "next/head"
-import gql from "graphql-tag"
-import { useQuery } from "@apollo/client"
+import useSWR from "swr"
 import MarkdownIt from "markdown-it"
 import stripHtml from "string-strip-html"
 
 import Icon from "../components/icon"
 import Layout from "../components/layout"
-
-const GET_LETTERS_QUERY = gql`
-  query {
-    letters(order_by: { created_at: desc }) {
-      id
-      body
-      signature
-    }
-  }
-`
 
 const Letter = (letter) => {
   const letterSnippet = (letter) => {
@@ -28,8 +16,10 @@ const Letter = (letter) => {
 
   return (
     <article className="bg-gray-200 text-gray-800 p-4 rounded-sm shadow-md flex flex-col justify-between">
-      <div className="mb-2" dangerouslySetInnerHTML={{ __html: letterSnippet(letter) }} />
-      <p className="mb-4">- {letter.signature}</p>
+      <div>
+        <div className="mb-2" dangerouslySetInnerHTML={{ __html: letterSnippet(letter) }} />
+        <p className="mb-4">- {letter.signature}</p>
+      </div>
       <a href={`/letters/${letter.id}`}>
         <span className="inline-block align-middle mr-2 underline">Read Letter</span>
         <Icon name="arrowRight" className="inline-block w-4" />
@@ -45,11 +35,11 @@ const LetterSkeleton = () => {
 }
 
 const LettersPage = () => {
-  const { loading, error, data } = useQuery(GET_LETTERS_QUERY)
+  const { data, error } = useSWR("/api/letters")
 
   let body
 
-  if (loading) {
+  if (!data) {
     body = (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
         {[...Array(12)].map((_, idx) => (
@@ -85,11 +75,6 @@ const LettersPage = () => {
       title="Letters"
       description="Read letters others sent to 2020. Join the community in telling 2020 how you really feel."
     >
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <div>
         <div className="container mx-auto px-6 xl:px-0">{body}</div>
       </div>

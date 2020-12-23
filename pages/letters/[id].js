@@ -1,22 +1,9 @@
-import gql from "graphql-tag"
-import MarkdownIt from "markdown-it"
-
 import { buildUrl } from "../../config"
 
-import apolloClient from "../../lib/apollo-client"
+import fetch from "../../lib/fetch"
 
 import Layout from "../../components/layout"
 import ShareButtons from "../../components/share-buttons"
-
-const GET_LETTER_QUERY = gql`
-  query GetLetter($id: Int!) {
-    letter: letters_by_pk(id: $id) {
-      id
-      body
-      signature
-    }
-  }
-`
 
 const LetterPage = ({ letter }) => {
   return (
@@ -40,17 +27,12 @@ const LetterPage = ({ letter }) => {
 export async function getServerSideProps(context) {
   const id = context.params.id
 
-  const data = await apolloClient.query({ query: GET_LETTER_QUERY, variables: { id } })
+  const letter = await fetch(buildUrl(`/api/letters/${id}`))
 
-  if (!data) {
+  if (!letter) {
     return {
       notFound: true
     }
-  }
-
-  const letter = {
-    ...data.data.letter,
-    bodyHtml: MarkdownIt().render(data.data.letter.body || "")
   }
 
   return {
