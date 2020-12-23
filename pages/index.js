@@ -3,7 +3,10 @@ import { useState } from "react"
 import gql from "graphql-tag"
 import { useMutation } from "@apollo/client"
 
+import { buildUrl } from "../config"
+
 import Layout from "../components/layout"
+import ShareButtons from "../components/share-buttons"
 
 const CREATE_LETTER_MUTATION = gql`
   mutation CreateLetter($body: String!, $signature: String!, $email: String) {
@@ -40,7 +43,7 @@ const HomePage = () => {
           </p>
         </div>
 
-        <form onSubmit={handleLetterSubmit} className="max-w-md mx-auto">
+        <form onSubmit={handleLetterSubmit} className="max-w-md mx-auto mb-8">
           <div className="mb-4">
             <textarea
               name="body"
@@ -98,6 +101,9 @@ const HomePage = () => {
             />
           </div>
         </form>
+
+        <p className="text-sm text-center mb-0">Loving this site? Share it!</p>
+        <ShareButtons url={buildUrl("/")} />
       </div>
     </Layout>
   )

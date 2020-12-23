@@ -1,19 +1,12 @@
 import gql from "graphql-tag"
 import MarkdownIt from "markdown-it"
-import {
-  EmailIcon,
-  EmailShareButton,
-  FacebookIcon,
-  FacebookShareButton,
-  TwitterIcon,
-  TwitterShareButton
-} from "react-share"
 
 import { buildUrl } from "../../config"
 
 import apolloClient from "../../lib/apollo-client"
 
 import Layout from "../../components/layout"
+import ShareButtons from "../../components/share-buttons"
 
 const GET_LETTER_QUERY = gql`
   query GetLetter($id: Int!) {
@@ -26,8 +19,6 @@ const GET_LETTER_QUERY = gql`
 `
 
 const LetterPage = ({ letter }) => {
-  const url = buildUrl(`/letters/${letter.id}`)
-
   return (
     <Layout
       title={`Letter from ${letter.signature}`}
@@ -40,17 +31,7 @@ const LetterPage = ({ letter }) => {
         </div>
 
         <p className="text-sm text-center mb-0">Tell the world how much you love this letter!</p>
-        <div className="flex justify-center">
-          <EmailShareButton url={url} className="w-10 rounded-sm overflow-hidden mx-1">
-            <EmailIcon />
-          </EmailShareButton>
-          <FacebookShareButton url={url} className="w-10 rounded-sm overflow-hidden mx-1">
-            <FacebookIcon />
-          </FacebookShareButton>
-          <TwitterShareButton url={url} className="w-10 rounded-sm overflow-hidden mx-1">
-            <TwitterIcon />
-          </TwitterShareButton>
-        </div>
+        <ShareButtons url={buildUrl(`/letters/${letter.id}`)} />
       </div>
     </Layout>
   )
