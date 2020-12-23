@@ -1,4 +1,5 @@
 import Layout from "../components/layout"
+import { buildUrl } from "../config"
 
 const TermsPage = () => {
   return (
@@ -41,8 +42,7 @@ const TermsPage = () => {
           <p>
             Your privacy is important to me. It is my policy to respect your privacy regarding any
             information I may collect from you across this website,{" "}
-            <a href="https://dear2020.seancdavis.com/">https://dear2020.seancdavis.com/</a>, and
-            other sites I own and operate.
+            <a href={buildUrl("/")}>{buildUrl("/")}</a>, and other sites I own and operate.
           </p>
           <p>
             I only ask for personal information when I truly need it to provide a service to you. I
