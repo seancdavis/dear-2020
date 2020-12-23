@@ -1,21 +1,10 @@
+import { useEffect, useState } from "react"
 import Head from "next/head"
-import gql from "graphql-tag"
-import { useQuery } from "@apollo/client"
 import MarkdownIt from "markdown-it"
 import stripHtml from "string-strip-html"
 
 import Icon from "../components/icon"
 import Layout from "../components/layout"
-
-const GET_LETTERS_QUERY = gql`
-  query {
-    letters(order_by: { created_at: desc }) {
-      id
-      body
-      signature
-    }
-  }
-`
 
 const Letter = (letter) => {
   const letterSnippet = (letter) => {
@@ -45,7 +34,19 @@ const LetterSkeleton = () => {
 }
 
 const LettersPage = () => {
-  const { loading, error, data } = useQuery(GET_LETTERS_QUERY)
+  const [letters, setLetters] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+
+  useEffect(async () => {
+    const res = await fetch("/api/letters")
+    const json = await res.json()
+    if (!json.letters) {
+      setError(true)
+    }
+    setLetters(json.letters)
+    setLoading(false)
+  }, [])
 
   let body
 
@@ -73,7 +74,7 @@ const LettersPage = () => {
   } else {
     body = (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
-        {data.letters.map((letter, idx) => (
+        {letters.map((letter, idx) => (
           <Letter {...letter} key={idx} />
         ))}
       </div>
