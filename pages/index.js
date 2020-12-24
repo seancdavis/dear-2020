@@ -12,10 +12,13 @@ import ShareButtons from "../components/share-buttons"
 const HomePage = () => {
   const router = useRouter()
   const initFormData = { body: "", signature: "", email: "" }
+  const [disabled, setDisabled] = useState(false)
   const [formData, setFormData] = useState(initFormData)
 
   const handleLetterSubmit = async (event) => {
     event.preventDefault()
+    setDisabled(true)
+
     const recaptcha = await load(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
     formData.token = await recaptcha.execute("submit")
 
@@ -23,7 +26,9 @@ const HomePage = () => {
     if (!letter) {
       return alert("There was an problem submitting your letter.")
     }
+
     setFormData(initFormData)
+    setDisabled(false)
     router.push(`/letters/${letter.id}`)
   }
 
@@ -96,6 +101,7 @@ const HomePage = () => {
               type="submit"
               value="Submit Letter"
               className="bg-gray-50 duration-300 hover:bg-opacity-80 inline-block px-4 py-2 rounded-sm text-gray-800 transition-colors"
+              disabled={disabled}
             />
           </div>
         </form>
