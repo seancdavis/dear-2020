@@ -29,7 +29,7 @@ export async function getServerSideProps(context) {
 
   const letter = await fetch(buildUrl(`/api/letters/${id}`))
 
-  if (!letter) {
+  if (!letter.id) {
     return {
       notFound: true
     }
