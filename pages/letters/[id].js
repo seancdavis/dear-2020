@@ -12,10 +12,14 @@ const LetterPage = ({ letter }) => {
       description={`Read a letter sent from ${letter.signature} to 2020. Then write your own letter!`}
     >
       <div className="max-w-md mx-auto px-6 sm:px-0">
-        <div className="p-4 bg-gray-200 text-gray-800 rounded-sm mb-6">
+        <div className="p-4 bg-gray-200 text-gray-800 rounded-sm mb-1">
           <div dangerouslySetInnerHTML={{ __html: letter.bodyHtml }} className="mb-4" />
           <p>- {letter.signature}</p>
         </div>
+
+        <a className="text-xs text-right block mb-6 italic" href="/feedback#flags">
+          Flag this letter
+        </a>
 
         <p className="text-sm text-center mb-2">Tell the world how much you love this letter!</p>
         <ShareButtons url={buildUrl(`/letters/${letter.id}`)} />
