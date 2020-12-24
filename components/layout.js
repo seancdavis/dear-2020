@@ -67,25 +67,32 @@ const Layout = ({ children, description, image, title }) => {
 
       <div className="py-8 px-4">
         <div className="max-w-md mx-auto text-center text-sm">
-          <p className="mb-4">
+          <p className="mb-6">
             Made with ❤️ and 🥪 by{" "}
             <a href="https://www.seancdavis.com/" target="_blank" className="underline">
               Sean C Davis
             </a>
             .
           </p>
-          <div className="sm:flex justify-center mt-10 sm:mt-0">
-            <p className="mx-2 mb-3">&copy; 2020, Sean C Davis</p>
-            <p className="hidden sm:block">-</p>
-            <p className="mx-2 mb-3">
+          <div className="sm:flex justify-center mt-10 sm:mt-0 mb-2">
+            <p className="mx-2 mb-2 sm:mb-0">&copy; 2020, Sean C Davis</p>
+            <p className="hidden sm:block mb-0">-</p>
+            <p className="mx-2 mb-2 sm:mb-0">
+              <a href="/terms" className="underline">
+                Legal Stuff
+              </a>
+            </p>
+          </div>
+          <div className="sm:flex justify-center">
+            <p className="mx-2 mb-2 sm:mb-0">
               <a href="/about" className="underline">
                 WTF is this?
               </a>
             </p>
-            <p className="hidden sm:block">-</p>
-            <p className="mx-2">
-              <a href="/terms" className="underline">
-                Legal Stuff
+            <p className="hidden sm:block mb-0">-</p>
+            <p className="mx-2 mb-0">
+              <a href="/feedback" className="underline">
+                Feedback
               </a>
             </p>
           </div>
