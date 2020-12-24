@@ -23,7 +23,9 @@ export default async (req, res) => {
     query: { id }
   } = req
 
+  console.log("REQUESTING ...")
   let { letter } = await db.request(GET_LETTER_QUERY, { id })
+  console.log(letter)
 
   if (letter) {
     letter.bodyHtml = MarkdownIt().render(letter.body || "")
