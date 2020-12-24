@@ -15,7 +15,7 @@ const GET_LETTER_QUERY = gql`
 
 export default async (req, res) => {
   const db = new Database({
-    hasura_secret: process.env.NEXT_PUBLIC_HASURA_API_KEY,
+    hasura_secret: process.env.HASURA_API_KEY,
     hasura_url: process.env.NEXT_PUBLIC_HASURA_URL
   })
 
@@ -23,12 +23,14 @@ export default async (req, res) => {
     query: { id }
   } = req
 
+  console.log("REQUESTING ...")
   let { letter } = await db.request(GET_LETTER_QUERY, { id })
+  console.log(letter)
 
   if (letter) {
     letter.bodyHtml = MarkdownIt().render(letter.body || "")
   }
 
   res.statusCode = 200
-  res.json(letter)
+  res.json(letter || {})
 }

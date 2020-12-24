@@ -22,7 +22,7 @@ const CREATE_LETTER_MUTATION = gql`
 
 export default async (req, res) => {
   const db = new Database({
-    hasura_secret: process.env.NEXT_PUBLIC_HASURA_API_KEY,
+    hasura_secret: process.env.HASURA_API_KEY,
     hasura_url: process.env.NEXT_PUBLIC_HASURA_URL
   })
 
