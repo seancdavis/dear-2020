@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
+import { load } from "recaptcha-v3"
 
 import { buildUrl } from "../config"
 
@@ -15,6 +16,9 @@ const HomePage = () => {
 
   const handleLetterSubmit = async (event) => {
     event.preventDefault()
+    const recaptcha = await load(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
+    formData.token = await recaptcha.execute("submit")
+
     const { letter } = await post("/api/letters", formData)
     if (!letter) {
       return alert("There was an problem submitting your letter.")

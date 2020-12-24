@@ -1,6 +1,7 @@
 import gql from "graphql-tag"
 
 const Database = require("../../lib/database")
+const { request } = require("../../lib/fetch")
 
 const GET_LETTERS_QUERY = gql`
   query {
@@ -35,7 +36,13 @@ export default async (req, res) => {
       response = await db.request(GET_LETTERS_QUERY)
       break
     case "POST":
-      response = await db.request(CREATE_LETTER_MUTATION, body)
+      let { success } = await request(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${body.token}`
+      )
+      delete body.token
+      if (success) {
+        response = await db.request(CREATE_LETTER_MUTATION, body)
+      }
       break
   }
 
