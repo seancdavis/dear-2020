@@ -58,3 +58,7 @@ li > ol {
 li {
   @apply mb-3;
 }
+
+input[disabled] {
+  opacity: 0.25;
+}
