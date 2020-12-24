@@ -26,7 +26,11 @@ export default async (req, res) => {
     hasura_url: process.env.NEXT_PUBLIC_HASURA_URL
   })
 
+  console.log(db)
+
   const { body, method } = req
+
+  console.log(body, method)
 
   let response = {}
 
